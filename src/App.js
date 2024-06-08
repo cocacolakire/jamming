@@ -1,23 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import SearchBar from './components/searchbar';
+import SpotifyAuth from './backend/SpotifyAuth';
+import { Spotify } from './backend/APIcall';
+
+import { useState } from 'react';
+
 
 function App() {
+
+  const [token, setToken] = useState("");
+  const [expiration, setExpiration] = useState(0);
+  const [tokenType, setType] = useState("");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <SpotifyAuth setToken={setToken} setExpiration={setExpiration} setType={setType}/>
+       <SearchBar accessToken={token}/>
     </div>
   );
 }
