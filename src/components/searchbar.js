@@ -11,22 +11,39 @@ function SearchBar(props){
         }
     }
 
+    const setProps = (searchResp) => {
+        
+        props.setTrack(searchResp["tracks"]);
+        props.setAlbum(searchResp["albums"]);
+        props.setArtists(searchResp["artists"]);
+       
+    }
+
     const handleButtonPress = (event) => {
         if (event.target.name == "searchBtn" && searchItem.length > 0){
             event.preventDefault();
-            Spotify.search(props.accessToken);
-            //alert("You pressed button");
+           Spotify.search(props.accessToken, searchItem).then(
+                (searchResp) => {
+                    setProps(searchResp);
+                }
+            );
+            
         }
     }
 
     const handleKeyPress = (event) => {
         if( event.key === 'Enter' && searchItem.length > 0){
             event.preventDefault();
-            Spotify.search(props.accessToken);
-            alert("you pressed enter")
+            Spotify.search(props.accessToken, searchItem).then(
+                (searchResp) => {
+                    setProps(searchResp);
+                }
+            );
+            ;
         }
     }
 
+    // Refactor this into a representational button component
     return (
         <div className="search_container">
             

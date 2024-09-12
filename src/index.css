@@ -1,3 +1,14 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --accent-color: #e74c3c;
+  --background-color: #131515;
+  --track-color: #BCD2EE;
+  --text-color: #333;
+  --headline-color:#99C24D;
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +16,83 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  box-sizing: border-box;
+}
+
+p{
+  margin: 0;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.search_container {
+  display: block;
+}
+
+
+.result_container {
+  display: block;
+}  
+
+.page_title {
+  animation: pulse 1.5s infinite ease-in-out;
+  display: inline-block;  /* Ensure it's treated as a block element */
+  color: var(--headline-color);
+}
+
+/* Define keyframes for pulsating effect */
+@keyframes pulse {
+  0% {
+      transform: scale(1);   /* Initial size */
+  }
+  50% {
+      transform: scale(1.2); /* Grow to 120% */
+  }
+  100% {
+      transform: scale(1);   /* Back to initial size */
+  }
+}
+
+.tracklist_contaienr{
+  width: 25%;
+  margin-left: 20px;
+}
+
+.track_container{
+  width: 100%;
+  background-color: var(--track-color);
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.track_container h3 {
+  margin: 0;
+  text-align: left;
+}
+
+.track_inner_container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.track_image_container{
+  display: flex;            /* Enable Flexbox */
+  justify-content: center;   /* Horizontally center the image */
+  align-items: center; 
+}
+
+.track_image_container img {
+  width: 100%;  /* Make the image take up 100% of the container width */
+  height: auto;  /* Maintain the aspect ratio */
+  object-fit: contain;  /* Ensures the entire image is visible */
+  display: block;  /* Remove inline element gaps */
+}
+
+.track_text_container{
+  margin: auto;
 }

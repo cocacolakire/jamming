@@ -27,9 +27,10 @@ class Spotify {
     
     }
 
-    static async search(accessToken){
+    static async search(accessToken, searchStr){
         let postBody = {
-            token : accessToken
+            token : accessToken,
+            searchTerm : searchStr
         };
         try {
             const response = await fetch("http://localhost:3001/api/search", {
@@ -40,6 +41,19 @@ class Spotify {
                 body: JSON.stringify(postBody)
                
             });
+
+            if (!response.ok){
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              
+            const {artists, tracks, albums} = await response.json();
+            //console.log(artists);
+            return {
+                artists:    artists.items,
+                tracks:     tracks.items,
+                albums:     albums.items
+            };
+            
         }
         catch (error) {
             console.error('Error fetching the token:', error);
