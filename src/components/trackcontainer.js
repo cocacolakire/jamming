@@ -2,7 +2,7 @@
 function Track({track, index}){
 return (
     <section className="track_container" key={index}>
-                    <h3>{track.trackName}</h3>
+                    <h3 className="trackname">{track.trackName}</h3>
                     <div className="track_inner_container">
                         <div className="track_image_container"> 
                             <img src={track.smallestImage} alt={track.trackName} />
@@ -13,6 +13,11 @@ return (
                             <p>{track.artists}</p>
                             <p>Released: {track.releaseYear}</p>
                             
+                        </div>
+                        <div className="btn_container">
+                            <button className="add_track_btn">
+                                Save
+                            </button>
                         </div>
                     </div>
     </section>
