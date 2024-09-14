@@ -1,5 +1,5 @@
 
-function Track({track, index}){
+function Track({track, index, buttonAction, result}){
 return (
     <section className="track_container" key={index}>
                     <h3 className="trackname">{track.trackName}</h3>
@@ -15,8 +15,8 @@ return (
                             
                         </div>
                         <div className="btn_container">
-                            <button className="add_track_btn">
-                                Save
+                            <button className={result ? "add_track_btn" : "remove_track_btn"} onClick={() => buttonAction(track)}>
+                                {result ? "Save" : "Remove"}
                             </button>
                         </div>
                     </div>

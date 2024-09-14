@@ -1,6 +1,27 @@
 import { useState } from "react";
 import { Spotify } from "../backend/APIcall";
 
+function cleanTracks(tracks) {
+    return tracks.map(track => {
+        // Extract the necessary information
+        const smallestImage = track.album.images.reduce((smallest, image) => {
+            return image.height < smallest.height ? image : smallest;
+        }, track.album.images[0]);
+  
+        const trackInfo = {
+            id: track.id,
+            trackName: track.name,
+            albumName: track.album.name,
+            artists: track.artists.map(artist => artist.name).join(', '),
+            releaseYear: new Date(track.album.release_date).getFullYear(),
+            songLink: track.external_urls.spotify,
+            smallestImage: smallestImage.url
+        };
+  
+        return trackInfo;
+    });
+  }
+
 function SearchBar(props){
 
     let [searchItem, setSearchItem] = useState("");
@@ -13,7 +34,7 @@ function SearchBar(props){
 
     const setProps = (searchResp) => {
         
-        props.setTrack(searchResp["tracks"]);
+        props.setTrack(cleanTracks(searchResp["tracks"]));
         props.setAlbum(searchResp["albums"]);
         props.setArtists(searchResp["artists"]);
        

@@ -35,7 +35,8 @@ code {
 
 
 .result_container {
-  display: block;
+  display: flex;
+  justify-content: space-around;
 }  
 
 .page_title {
@@ -59,7 +60,6 @@ code {
 
 .tracklist_contaienr{
   width: 40%;
-  margin-left: 20px;
 }
 
 .track_container{
@@ -118,6 +118,19 @@ code {
   cursor: pointer; /* Change cursor to pointer */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.remove_track_btn{
+  background-color: #F55D3E;
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  padding: 10px 20px; /* Add padding */
+  border-radius: 50px; /* Round borders */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Change cursor to pointer */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
+
 }
 
 .add_track_btn:hover {

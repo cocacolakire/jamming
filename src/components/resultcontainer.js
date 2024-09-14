@@ -1,37 +1,37 @@
 import Track from "./trackcontainer";
 
-function cleanTracks(tracks) {
-    return tracks.map(track => {
-        // Extract the necessary information
-        const smallestImage = track.album.images.reduce((smallest, image) => {
-            return image.height < smallest.height ? image : smallest;
-        }, track.album.images[0]);
 
-        const trackInfo = {
-            trackName: track.name,
-            albumName: track.album.name,
-            artists: track.artists.map(artist => artist.name).join(', '),
-            releaseYear: new Date(track.album.release_date).getFullYear(),
-            songLink: track.external_urls.spotify,
-            smallestImage: smallestImage.url
-        };
+function ResultContainer({tracks, setSavedTracks, setTracks, savedTracks}){
 
-        return trackInfo;
-    });
-}
+    function saveTrack(track) {
+        setTracks(tracks.filter((currTrack) => currTrack.id !== track.id));
+        setSavedTracks(prevTracks => [...prevTracks, track]);
+    }
+    function removeTrack(track){
+        setTracks(prevTracks => [...prevTracks, track]);
+        setSavedTracks(savedTracks.filter(savedTrack => savedTrack.id !== track.id));
+    }
 
-function ResultContainer({tracks}){
-    console.log(tracks);
-    const cleanedTracks = cleanTracks(tracks);
-    console.log(cleanedTracks);
     return (
         <div className="result_container">
-        <h1 className="page_title">Jamming!</h1>
+        
         <section className="tracklist_contaienr">
+            <h3 className="page_title">Results</h3>
             {
-                cleanedTracks.map((track, index) => (
-                    <Track track={track} index={index} key={index}/>
+                tracks.map((track, index) => (
+                    <Track track={track} index={index} key={index} buttonAction={saveTrack} result={true}/>
                 ))
+            }
+        </section>
+        <section className="tracklist_contaienr">
+            <h3 className="page_title">Saved tracks</h3>
+            {
+                savedTracks.map((track, index) => (
+                    <Track track={track} index={index} key={index} buttonAction={removeTrack} result={false}/>
+                ))
+            }
+            {
+                savedTracks.length && "Create playlist"
             }
         </section>
         </div>
